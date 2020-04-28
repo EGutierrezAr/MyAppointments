@@ -37,4 +37,9 @@
     <string name="dialog_create_appointment_exit_positive_btn">Si, Salir</string>
     <string name="dialog_create_appointment_exit_negative_btn">Continuar registro</string>
     <string name="validate_appointment_description">La descripción es demaciado corta</string>
+    <string name="label_scheduled_time">Hora de la cita</string>
+    <string name="Label_confirm_appointment_data">Datos de la cita</string>
+    <string name="validate_appointment_date">Es necesario seleccionar una fecha</string>
+    <string name="validate_appointment_time">En necesario definir una hora  para la cita</string>
+    <string name="errro_loading_specialties">Ocurrio un problema al cargar las especialidades</string>
 </resources>

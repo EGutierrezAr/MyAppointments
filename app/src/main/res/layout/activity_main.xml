@@ -9,7 +9,7 @@
     android:padding="12dp"
     android:background="@drawable/login_background"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
         android:background="@color/whiteTransparent"

@@ -1,8 +1,9 @@
-package com.example.myappointments
+package com.example.myappointments.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myappointments.R
 import com.example.myappointments.model.Appointment
 import kotlinx.android.synthetic.main.activity_appointments.*
 import java.util.ArrayList
@@ -25,7 +26,8 @@ class AppointmentsActivity : AppCompatActivity() {
         )
 
         rvAppointments.layoutManager = LinearLayoutManager(this) //GridLayoutManager
-        rvAppointments.adapter = AppointmentAdapter(appointments)
+        rvAppointments.adapter =
+            AppointmentAdapter(appointments)
 
     }
 }
