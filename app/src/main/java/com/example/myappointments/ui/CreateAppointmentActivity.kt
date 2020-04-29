@@ -4,12 +4,14 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myappointments.R
 import com.example.myappointments.io.ApiService
+import com.example.myappointments.model.Doctor
 import com.example.myappointments.model.Specialty
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_create_appointment.*
@@ -74,6 +76,8 @@ class CreateAppointmentActivity : AppCompatActivity() {
 
         loadSpecialties()
 
+        listenSpecialtyChanges()
+
         val doctorOptions = arrayOf("Doctor A","Doctor B", "Doctor C")
         spinnerDoctors.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, doctorOptions)
     }
@@ -91,15 +95,61 @@ class CreateAppointmentActivity : AppCompatActivity() {
                 response: Response<ArrayList<Specialty>>
             ) {
                 if (response.isSuccessful) { // when te response code is between 200..300
-                    val specialties = response.body()
-
+                    /*val specialties = response.body()
                     val specialtyOptions = ArrayList<String>()
                     specialties?.forEach{
                         specialtyOptions.add(it.name)
                     }
-                    spinnerSpecialties.adapter = ArrayAdapter<String>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, specialtyOptions)
+                    spinnerSpecialties.adapter = ArrayAdapter<String>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, specialtyOptions) */
+                    response.body()?.let {
+                        val specialties = it.toMutableList()
+                        spinnerSpecialties.adapter = ArrayAdapter<Specialty>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, specialties)
+                    }
+
                 }
             }
+        })
+    }
+
+    private fun listenSpecialtyChanges(){
+        spinnerSpecialties.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                adapter: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val specialty = adapter?.getItemAtPosition(position) as Specialty
+                //Toast.makeText(this@CreateAppointmentActivity, specialty.name, Toast.LENGTH_SHORT).show()
+                loadDoctors(specialty.id)
+            }
+
+        }
+    }
+
+    private fun loadDoctors(specialtyId: Int){
+        val call = apiService.getDoctors(specialtyId)
+        call.enqueue(object: Callback<ArrayList<Doctor>>{
+            override fun onFailure(call: Call<ArrayList<Doctor>>, t: Throwable) {
+                Toast.makeText(this@CreateAppointmentActivity,getString(R.string.errro_loading_doctors),Toast.LENGTH_SHORT).show()
+                finish()
+            }
+
+            override fun onResponse(
+                call: Call<ArrayList<Doctor>>,
+                response: Response<ArrayList<Doctor>>
+            ) {
+                if (response.isSuccessful) { // when te response code is between 200..300
+                    response.body()?.let {
+                        val doctors = it.toMutableList()
+                        spinnerDoctors.adapter = ArrayAdapter<Doctor>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, doctors)
+                    }
+                }
+            }
+
         })
     }
 
