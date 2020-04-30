@@ -11,13 +11,14 @@
     app:cardCornerRadius="3dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
+    android:animateLayoutChanges="true"
     tools:context=".ui.MenuActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -46,6 +47,73 @@
             android:gravity="center_horizontal"
             android:id="@+id/tvScheduledTime"
             tools:text="Hora de Atención:3:00 PM" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/tvStatus"
+                tools:text="Confirmada" />
+
+            <ImageButton
+                android:id="@+id/ibExpand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_expand_more"
+                tools:ignore="RtlHardcoded"
+                tools:src="@drawable/ic_expand_less" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutDetails"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/tvSpecialty"
+                tools:text="Neurología" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/tvType"
+                tools:text="Consulta" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:id="@+id/tvCreatedAt"
+                tools:text="Esta se registro el día 2020-04-20, con la siguiente descripción:" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:id="@+id/tvDescription"
+                tools:text="Tengo dolor de cabeza" />
+
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
