@@ -44,4 +44,10 @@
     <string name="errro_loading_specialties">Ocurrio un problema al cargar las especialidades</string>
     <string name="errro_loading_doctors">Ocurrio un problema al cargar los doctores</string>
     <string name="error_loading_hours">No se han podido mostrar las horas</string>
+    <string name="label_select_doctor_and_date">Seleccione un doctor y una fecha para ver sus horas disponibles.</string>
+    <string name="label_not_available_hours">No se encontraron horas disponibles para el día seleccionado.</string>
+    <string name="error_login_response">Se obtuvo una respuesta inesperada del servidor</string>
+    <string name="error_invalid_credentials">Las credenciales son incorrectas</string>
+    <string name="error_empty_credencials">Por favor ingrese un correo y una contraseña</string>
+    <string name="welcome_name">Bienvenido %1$s</string>
 </resources>
